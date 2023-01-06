@@ -4,6 +4,8 @@ import nodeResolve from '@rollup/plugin-node-resolve'
 import commonjs    from '@rollup/plugin-commonjs'
 import { terser }  from 'rollup-plugin-terser'
 
+const libraryName = 'myLib'
+
 const treeshake = {
 	moduleSideEffects: false,
 	propertyReadSideEffects: false,
@@ -56,7 +58,7 @@ const browserConfig = {
     {
       file: 'dist/bundle.min.js',
       format: 'iife',
-      name: 'cryptoUtils',
+      name: libraryName,
       plugins: [terser()],
       sourcemap: true,
       globals: {
@@ -66,7 +68,7 @@ const browserConfig = {
   ],
   plugins: [ 
     typescript(tsConfig), 
-    nodeResolve({ browser: true, preferBuiltins: false }), 
+    nodeResolve({ browser: true }), 
     commonjs() 
   ],
   strictDeprecations: true,
